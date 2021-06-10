@@ -6,15 +6,21 @@ for GOGBOT Festival 2021
 ***/
 
 import processing.video.*; //Don't forget to install the libary locally in the IDE
+import processing.serial.*;
 
 Content content;
 Control control;
+Connect connect;
+
+int level;
 
 void setup(){
   //fullScreen();  //For production
   size(1280, 720); //For development
   frameRate(30); //Video's won't be higher anyway
   content = new Content(this); //Pass the PApplet of the sketch to use libary in class.
+  connect = new Connect(this);
+  connect.begin();
   control = new Control();
 }
 
@@ -23,6 +29,8 @@ void draw(){
   content.display(control.scene); //Display the correct content according to scene number
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
+  connect.read();
+  println("ARDUINO READ: " + level);
 }
 
 //Run the videos

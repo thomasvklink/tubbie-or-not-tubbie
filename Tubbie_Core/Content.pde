@@ -36,7 +36,7 @@ class Content {
     if (rabbit.time() == rabbit.duration()) { //Check if movie has finished
       println("AUTOPLAY");
       reset();
-      scene = int(random(1,3));
+      display(int(random(1,3)));
     }
   }
 
