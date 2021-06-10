@@ -2,15 +2,16 @@
 
 class Control{
   
-  int scene;
+  
+  int scene = 1;
   float time;
   
   Control(){
-    
   }
   
   void scene(){
-    scene = int(random(1,6));
+    scene = int(random(1,3));
+    println(scene);
   }
   
   void experience(){ //One method to bundel them together so that we only need to call this once in main and pass the scenes via this into all

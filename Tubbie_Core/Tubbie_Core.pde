@@ -9,7 +9,6 @@ import processing.video.*; //Don't forget to install the libary locally in the I
 
 Content content;
 Control control;
-int scene = 1; //Global variabe for development purposes
 
 void setup(){
   //fullScreen();  //For production
@@ -21,7 +20,7 @@ void setup(){
 
 void draw(){
   background(0); //Black background as default backdrop
-  content.display(scene); //Display the correct content according to scene number
+  content.display(control.scene); //Display the correct content according to scene number
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
 }
@@ -32,12 +31,13 @@ void movieEvent(Movie m){
   }
  
 void keyPressed(){
-  //scene = int(random(1,2));
+  control.scene();
   content.reset();
-  scene = 2;
 }
 
 /***
+
+Flow: Start intro video > loop until interaction > play dark content > return to happy > IF no interaction during video move on 
 
 The scene variables seems to be global (for development it is) but it should be local to the classes. 
 We do use a scene variable in each class we essentialy does the same.
