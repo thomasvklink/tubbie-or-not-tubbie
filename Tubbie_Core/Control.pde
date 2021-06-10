@@ -9,24 +9,30 @@ class Control{
     
   }
   
-  void experience(int scene){ //One method to bundel them together so that we only need to call this once in main and pass the scenes via this into all
-   content(scene);
-   light(scene);
-   sound(scene);
+  void scene(){
+    scene = int(random(1,6));
   }
-  void content(int scene){ //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
+  
+  void experience(){ //One method to bundel them together so that we only need to call this once in main and pass the scenes via this into all
+   content();
+   light();
+   sound();
+  }
+  
+  void content(){ //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
     
   }
   
-  void light(int scene){ //Code to send something back to the arduino to change the lighting sequence that is programmed there
+  void light(){ //Code to send something back to the arduino to change the lighting sequence that is programmed there
   
   }
   
-  void sound(int scene){ //It's best to include sound in the video but if we want to add some via Processing we can do it here.
+  void sound(){ //It's best to include sound in the video but if we want to add some via Processing we can do it here.
     
   }
   
   void clock(int max){ //Method to time the experience and take action accordingly
+    //time = millis();
     time = time + 0.0333333333333333; //Convert framerate (30) to seconds
     println(time); //Bit slow still TODO
     if (time > max){ //End experience after a desired amount of time (max)

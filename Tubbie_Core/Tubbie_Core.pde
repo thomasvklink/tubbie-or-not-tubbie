@@ -21,8 +21,8 @@ void setup(){
 
 void draw(){
   background(0); //Black background as default backdrop
-  content.display(scene); //Display the correct content according to scene number
-  control.experience(scene); //Control the experience based on the scene
+  content.display(control.scene); //Display the correct content according to scene number
+  control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
 }
 
@@ -30,6 +30,12 @@ void draw(){
 void movieEvent(Movie m){
     m.read();
   }
+ 
+void keyPressed(){
+  //scene = int(random(1,2));
+  content.reset();
+  scene = 2;
+}
 
 /***
 
