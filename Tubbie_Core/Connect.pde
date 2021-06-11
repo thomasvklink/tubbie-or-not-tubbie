@@ -7,13 +7,13 @@ class Connect {
   Serial port;
   //Variables for Arduino communication
   String buff = "";
-  char header[] = {'L'};
+  char header[] = {'B'};
   int value[] = new int[1];
   int diffValue[] = new int[1];
   int NEWLINE = 10;
   int n;
   int b;
-
+  
   Connect(PApplet app) {
     this.app = app;
   }
@@ -33,7 +33,7 @@ class Connect {
       serialEvent(port.read()); // read data
     }
     println("This works");
-    level = value[0]; //level value
+    pressed = boolean(value[0]); //level value
   }
 
   //Catch and parse serial data from Arduino

@@ -2,16 +2,11 @@
 
 class Control{
   
-  
-  int scene = 1;
+  int scene = 2;
   float time;
-  
+  Connect connect;
+
   Control(){
-  }
-  
-  void scene(){
-    scene = int(random(1,3));
-    println(scene);
   }
   
   void experience(){ //One method to bundel them together so that we only need to call this once in main and pass the scenes via this into all
@@ -21,7 +16,14 @@ class Control{
   }
   
   void content(){ //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
-    
+    if (pressed){
+      scene(4,4);
+    }
+  }
+  
+  void scene(int start, int stop){
+    scene = int(random(start,stop+1));
+    println(scene);
   }
   
   void light(){ //Code to send something back to the arduino to change the lighting sequence that is programmed there

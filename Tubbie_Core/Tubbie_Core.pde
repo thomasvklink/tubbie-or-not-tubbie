@@ -1,3 +1,5 @@
+
+
 /***
 Tubbie or not Tubbie
 Group 15 - Ex-Pers
@@ -6,13 +8,14 @@ for GOGBOT Festival 2021
 ***/
 
 import processing.video.*; //Don't forget to install the libary locally in the IDE
+import processing.sound.*;
 import processing.serial.*;
 
 Content content;
 Control control;
 Connect connect;
 
-int level;
+boolean pressed;
 
 void setup(){
   //fullScreen();  //For production
@@ -30,7 +33,7 @@ void draw(){
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
   connect.read();
-  println("ARDUINO READ: " + level);
+  println("ARDUINO READ: " + pressed);
 }
 
 //Run the videos
@@ -38,10 +41,10 @@ void movieEvent(Movie m){
     m.read();
   }
  
-void keyPressed(){
-  control.scene();
-  content.reset();
-}
+//void keyPressed(){
+//  control.scene();
+//  content.reset();
+//}
 
 /***
 

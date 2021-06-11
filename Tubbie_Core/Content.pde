@@ -19,14 +19,21 @@ class Content {
 
   void display(int inputScene) { //Changing the scene variables switches the content (in theory)
     switch(inputScene) { //Tried to change the image name as string but that didn't work, so this ugly way it is.
-    case 1:
+    case 1: //Intro - Audio only
+      
+    break;
+    case 2: //Happy - Rabbits
+      rabbit.volume(0);
       rabbit.play();
       image(rabbit, 0, 0, width, height); //Video will resize according to window but let's try to focus on 16:9 HD to Full HD ish
-      break;
-    case 2:
+     break;
+    case 3: //Happy - Alphabet
       alphabet.play();
       image(alphabet, 0, 0, width, height);
-      break;
+     break;
+     case 4: //Dark 1 -
+       
+     break;
     }
     scene = inputScene;
     autoplay();
