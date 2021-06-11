@@ -4,6 +4,8 @@ class Control{
   
   int scene = 2;
   float time;
+  int timer = 0;
+  boolean isPressed;
   Connect connect;
 
   Control(){
@@ -17,7 +19,17 @@ class Control{
   
   void content(){ //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
     if (pressed){
+      isPressed = true;
       scene(4,4);
+    }
+    if (isPressed){
+      timer++;
+    } else {
+      timer = 0;
+    }
+    if (scene == 4 && timer > 90) {
+      isPressed = false;
+      scene(2,3);
     }
   }
   
