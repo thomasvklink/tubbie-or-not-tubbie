@@ -32,7 +32,6 @@ class Connect {
     while (port.available() > 0) {
       serialEvent(port.read()); // read data
     }
-    println("This works");
     pressed = boolean(value[0]); //level value
   }
 

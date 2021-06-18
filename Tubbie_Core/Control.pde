@@ -2,52 +2,75 @@
 
 class Control {
 
-  int scene = 2;
+  Content content;
+  //int scene = 2;
   float time;
   int timer = 0;
   boolean isPressed;
+  boolean sceneSwitch;
   Connect connect;
 
-  Control() {
+  Control(PApplet app) {
+    content = new Content(app);
   }
 
   void experience() { //One method to bundel them together so that we only need to call this once in main and pass the scenes via this into all
     content();
     light();
     sound();
+    //println(timer);
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
-    if (pressed) {
+  println(scene);
+    if (scene == 1){
+      block = true;
+    } else {
+      block = false;
+    }
+    println(block);
+    if (pressed && !block) {
       isPressed = true;
-      scene(4, 7);
+      content.reset();
+        if(!sceneSwitch){
+          scene(4,7);
+          sceneSwitch = true;
+        }
     }
     if (isPressed) {
       timer++;
     } else {
       timer = 0;
     }
-    if (scene == 4 || scene == 5 || scene == 6 || scene == 7  && timer > 90) {
+    if ((scene == 4 || scene == 5 || scene == 6 || scene == 7 ) && timer > 90) {
       isPressed = false;
+      sceneSwitch = false;
       scene(2, 3);
+      timer = 0;
     }
+    
+    //if (scene == 4 || scene == 5 || scene == 6 || scene == 7  && timer > 90) {
+    //  isPressed = false;
+    //  scene(2, 3);
+    //}
   }
 
   void scene(int start, int stop) {
     scene = int(random(start, stop+1));
-    println(scene);
+    //println("SCENE: " + scene);
   }
 
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
   }
 
   void sound() { //It's best to include sound in the video but if we want to add some via Processing we can do it here.
+    
   }
 
   void clock(int max) { //Method to time the experience and take action accordingly
     //time = millis();
     time = time + 0.0333333333333333; //Convert framerate (30) to seconds
-    println(time); //Bit slow still TODO
+    //println(time); //Bit slow still TODO
     if (time > max) { //End experience after a desired amount of time (max)
       println("3 minutes after the start of experience, end it now! You need to MOVE");
       time = 0;

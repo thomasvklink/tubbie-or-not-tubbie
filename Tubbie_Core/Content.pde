@@ -2,9 +2,11 @@
 
 class Content {
 
-  int scene;
+  //int scene;
+  int timer;
+  int timer2;
   //Sounds
-  SoundFile intro;
+  Movie intro;
   //Videos
   //nice happy videos
   Movie startscene;
@@ -17,8 +19,8 @@ class Content {
   Movie dark4;
 
   Content(PApplet app) {
-    intro = new SoundFile(app,"intro.mp3");
     //startscene = new Movie(app, "startscene.mp4");
+    intro = new Movie(app, "intro.mp4");
     rabbit = new Movie(app, "rabbit.mp4"); //Upload something random into the data folder to make this work
     alphabet = new Movie(app, "alphabet.mp4");
     dark1 = new Movie(app, "dark1.mov");
@@ -30,9 +32,13 @@ class Content {
 
   void display(int inputScene) { //Changing the scene variables switches the content (in theory)
     switch(inputScene) { //Tried to change the image name as string but that didn't work, so this ugly way it is.
-    case 1: //Intro - Audio only
-      intro.play();
-    break;
+    case 1: //Intro
+    intro.play();
+    image(intro, 0, 0, width, height);
+    timer2++;
+    println(timer2);
+    end();
+      break;
     case 2: //Happy - Rabbits
       rabbit.volume(0);
       rabbit.play();
@@ -45,76 +51,93 @@ class Content {
       break;
     case 4: //Dark 1 -
       dark1.play();
+      timer++;
       image(dark1, 0, 0, width, height);
-      end();
+     end();
       break;
-    case 5: //Dark 1 -
+    case 5: //Dark 2 
       dark2.play();
-      image(dark2, 0, 0, width, height);
-      end();
+      timer++;
+    image(dark2, 0, 0, width, height);
+    end();
       break;    
-    case 6: //Dark 1 -
+    case 6: //Dark 3 -
       dark3.play();
       image(dark3, 0, 0, width, height);
       end();
       break;    
-    case 7: //Dark 1 -
+    case 7: //Dark 4 -
       dark4.play();
       image(dark4, 0, 0, width, height);
       end();
       break;
     }
-    scene = inputScene;
-    autoplay();
+    //autoplay();
   }
 
   void autoplay() { //If there is no interaction continue playing happy content
-    if (rabbit.time() == rabbit.duration()) { //Check if movie has finished
+    if (rabbit.time() >= rabbit.duration()) { //Check if movie has finished
       println("AUTOPLAY");
       reset();
-      display(int(random(1, 3)));
+      display(int(random(2, 3)));
     }
   }
 
   void end() {
-    if (dark1.time() == dark1.duration()) { //Check if movie has finished
+    if (timer > 90) { //Check if movie has finished
+      timer = 0;
       reset();
     }
-    if (dark2.time() == dark2.duration()) { //Check if movie has finished
-      reset();
+    if (timer2 > 400){
+      intro.stop();
+      scene = 2;
+      timer2 = 0;
     }
-    if (dark3.time() == dark3.duration()) { //Check if movie has finished
-      reset();
-    }
-    if (dark4.time() == dark4.duration()) { //Check if movie has finished
-      reset();
-    }
+    //if (dark1.time() == dark1.duration()) { //Check if movie has finished
+    //  reset();
+    //}
+    //if (dark2.time() == dark2.duration()) { //Check if movie has finished
+    //  reset();
+    //}
+    //if (dark3.time() == dark3.duration()) { //Check if movie has finished
+    //  reset();
+    //}
+    //if (dark4.time() == dark4.duration()) { //Check if movie has finished
+    //  reset();
+    //}
   };
-
+  
   void reset() {
-    println("RESET");
-    switch(scene) {
-    case 1:
-      //
-      break;
-    case 2:
-      rabbit.stop();
-      break;
-    case 3:
-      alphabet.stop();
-      break;
-    case 4:
-      dark1.stop();
-      break;
-    case 5:
-      dark2.stop();
-      break;
-    case 6:
-      dark3.stop();
-      break;
-    case 7:
-      dark4.stop();
-      break;
+    println("RESET: " + scene);
+    rabbit.stop();
+    alphabet.stop();
+    dark1.stop();
+    dark2.stop();
+    dark3.stop();
+    dark4.stop();
+    
+    //switch(scene) {
+    //case 1:
+    //  //
+    //  break;
+    //case 2:
+    //  rabbit.stop();
+    //  break;
+    //case 3:
+    //  alphabet.stop();
+    //  break;
+    //case 4:
+    //  dark1.stop();
+    //  break;
+    //case 5:
+    //  dark2.stop();
+    //  break;
+    //case 6:
+    //  dark3.stop();
+    //  break;
+    //case 7:
+    //  dark4.stop();
+    //  break;
     }
-  }
+  
 }
