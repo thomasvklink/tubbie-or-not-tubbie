@@ -3,6 +3,8 @@
 class Content {
 
   int scene;
+  //Sounds
+  SoundFile intro;
   //Videos
   //nice happy videos
   Movie startscene;
@@ -15,6 +17,7 @@ class Content {
   Movie dark4;
 
   Content(PApplet app) {
+    intro = new SoundFile(app,"intro.mp3");
     //startscene = new Movie(app, "startscene.mp4");
     rabbit = new Movie(app, "rabbit.mp4"); //Upload something random into the data folder to make this work
     alphabet = new Movie(app, "alphabet.mp4");
@@ -28,8 +31,8 @@ class Content {
   void display(int inputScene) { //Changing the scene variables switches the content (in theory)
     switch(inputScene) { //Tried to change the image name as string but that didn't work, so this ugly way it is.
     case 1: //Intro - Audio only
-
-      break;
+      intro.play();
+    break;
     case 2: //Happy - Rabbits
       rabbit.volume(0);
       rabbit.play();

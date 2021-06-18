@@ -1,4 +1,4 @@
-#include <DmxSimple.h>
+//#include <DmxSimple.h>
 
 #define trigPin 4
 #define echoPin 5
@@ -11,22 +11,22 @@ boolean buttonPressed;
 
 //Variables for Processing communication
 int data[] = {buttonPressed};                     //Variables to send to Processing
-const int DATASIZE = sizeof(data) / sizeof(int);    //Calculate size of array in a integer
-char headers[] = {'B'};                             //Prefix for the data (headers)
+const int DATASIZE = sizeof(data) / sizeof(int);  //Calculate size of array in a integer
+char headers[] = {'B'};                           //Prefix for the data (headers)
 int incomingByte;
 
 void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  DmxSimple.usePin(3);
-  DmxSimple.maxChannel(6);
+  //DmxSimple.usePin(3);
+  //DmxSimple.maxChannel(6);
 
   Serial.begin(9600);
 }
 
 void loop() {
-  sendDMX(r, g, b);
+  //sendDMX(r, g, b);
   
   buttonPressed = isButtonPressed();
   //Serial communcation to Processing
@@ -76,7 +76,7 @@ byte getDistance() {
 }
 
 void sendDMX(byte red, byte green, byte blue) {
-  DmxSimple.write(1, red);
-  DmxSimple.write(2, green);
-  DmxSimple.write(3, blue);
+  //DmxSimple.write(1, red);
+  //DmxSimple.write(2, green);
+  //DmxSimple.write(3, blue);
 }
