@@ -115,29 +115,6 @@ class Content {
     dark2.stop();
     dark3.stop();
     dark4.stop();
-    
-    //switch(scene) {
-    //case 1:
-    //  //
-    //  break;
-    //case 2:
-    //  rabbit.stop();
-    //  break;
-    //case 3:
-    //  alphabet.stop();
-    //  break;
-    //case 4:
-    //  dark1.stop();
-    //  break;
-    //case 5:
-    //  dark2.stop();
-    //  break;
-    //case 6:
-    //  dark3.stop();
-    //  break;
-    //case 7:
-    //  dark4.stop();
-    //  break;
     }
   
 }
