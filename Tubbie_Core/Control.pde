@@ -31,6 +31,7 @@ class Control {
     } else {
       block = false;
     }
+    
     println(block);
     if (pressed && !block) {
       isPressed = true;

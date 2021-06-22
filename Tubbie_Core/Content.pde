@@ -1,4 +1,7 @@
 //Class for handeling the content (loading and playback)
+//Written by the amazing and overall good guy who we owe eternal credits and beers to: Ysbrand Burgstede
+//Hereby we also accept that ex-via is the better do group and we all secretly envy to be one of them
+//if any of the above lines are removed Ysbrand immediately retracts the rights to use his code
 
 class Content {
 
@@ -24,28 +27,30 @@ class Content {
   float pauseTimer;
   ArrayList<Movie> goodOnes;
   ArrayList<Movie> badOnes;
+  
   Content(PApplet app) {
     moviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
-    //startscene = new Movie(app, "startscene.mp4");
+    
     intro = new Movie(app, "intro.mp4");
-    goodOnes.add(new Movie(app, "rabbit.mp4")); //Upload something random into the data folder to make this work
+    goodOnes.add(new Movie(app, "rabbit.mp4"));
     goodOnes.add(new Movie(app, "alphabet.mp4"));
     badOnes.add(new Movie(app, "dark1.mov"));
     badOnes.add(new Movie(app, "dark2.mov"));
     badOnes.add(new Movie(app, "dark3.mov"));
     badOnes.add(new Movie(app, "dark4.mov"));
-    //rabbit.play(); //Play it once please although might want to loop this incase the scene isn't swiched automatically TODO
   }
+  
   void init() {    
     moviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
+    moviesToPlay.add(intro);
     moviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
   }
+  
   void showMovie() {
-    //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<moviesToPlay.size()) {      
       if (nowPlaying==null) {
         nowPlaying=moviesToPlay.get(0);
@@ -68,96 +73,11 @@ class Content {
     }
   }
 
-
   void addMovie(Movie newMovie) {
     moviesToPlay.add(newMovie);
   }
+  
+  void removeMovie(int index){
+    moviesToPlay.remove(index);
+  }
 }
-//  }
-//  void display(int inputScene) { //Changing the scene variables switches the content (in theory)
-//    switch(inputScene) { //Tried to change the image name as string but that didn't work, so this ugly way it is.
-//    case 1: //Intro
-//      intro.play();
-//      image(intro, 0, 0, width, height);
-//      timer2++;
-//      println(timer2);
-//      end();
-//      break;
-//    case 2: //Happy - Rabbits
-//      rabbit.volume(0);
-//      rabbit.play();
-//      image(rabbit, 0, 0, width, height); //Video will resize according to window but let's try to focus on 16:9 HD to Full HD ish
-//      break;
-//    case 3: //Happy - Alphabet
-//      alphabet.volume(0);
-//      alphabet.play();
-//      image(alphabet, 0, 0, width, height);
-//      break;
-//    case 4: //Dark 1 -
-//      dark1.play();
-//      timer++;
-//      image(dark1, 0, 0, width, height);
-//      end();
-//      break;
-//    case 5: //Dark 2 
-//      dark2.play();
-//      timer++;
-//      image(dark2, 0, 0, width, height);
-//      end();
-//      break;    
-//    case 6: //Dark 3 -
-//      dark3.play();
-//      image(dark3, 0, 0, width, height);
-//      end();
-//      break;    
-//    case 7: //Dark 4 -
-//      dark4.play();
-//      image(dark4, 0, 0, width, height);
-//      end();
-//      break;
-//    }
-//    //autoplay();
-//  }
-
-//  void autoplay() { //If there is no interaction continue playing happy content
-//    if (rabbit.time() >= rabbit.duration()) { //Check if movie has finished
-//      println("AUTOPLAY");
-//      reset();
-//      display(int(random(2, 3)));
-//    }
-//  }
-
-//  void end() {
-//    if (timer > 90) { //Check if movie has finished
-//      timer = 0;
-//      reset();
-//    }
-//    if (timer2 > 400) {
-//      intro.stop();
-//      scene = 2;
-//      timer2 = 0;
-//    }
-//    //if (dark1.time() == dark1.duration()) { //Check if movie has finished
-//    //  reset();
-//    //}
-//    //if (dark2.time() == dark2.duration()) { //Check if movie has finished
-//    //  reset();
-//    //}
-//    //if (dark3.time() == dark3.duration()) { //Check if movie has finished
-//    //  reset();
-//    //}
-//    //if (dark4.time() == dark4.duration()) { //Check if movie has finished
-//    //  reset();
-//    //}
-//  };
-
-//  void reset() {
-//    println("RESET: " + scene);
-//    rabbit.stop();
-//    alphabet.stop();
-//    dark1.stop();
-//    dark2.stop();
-//    dark3.stop();
-//    dark4.stop();
-//  }
-//}

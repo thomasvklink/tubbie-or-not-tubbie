@@ -13,7 +13,7 @@ Content content;
 Control control;
 Connect connect;
 
-int scene = 1;
+int scene = 2;
 boolean block;
 boolean pressed;
 
@@ -23,10 +23,11 @@ void setup(){
   size(1280, 720); //For development
   frameRate(30); //Video's won't be higher anyway
   content = new Content(this); //Pass the PApplet of the sketch to use libary in class.
+  content.init();
   connect = new Connect(this);
   connect.begin();
   control = new Control(this);
-  content.init();
+  
 }
 
 void draw(){
@@ -47,6 +48,7 @@ void movieEvent(Movie m){
     m.read();
    }
  
+
 void keyPressed(){
  // control.scene();
  // content.content();
