@@ -23,19 +23,19 @@ class Content {
   int currentIndex=0;
   float pauseTimer;
   ArrayList<Movie> goodOnes;
-
+  ArrayList<Movie> badOnes;
   Content(PApplet app) {
     moviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
+    badOnes=new ArrayList<Movie>();
     //startscene = new Movie(app, "startscene.mp4");
     intro = new Movie(app, "intro.mp4");
-    goodOnes.add(new Movie(app, "dark1.mov")); //Upload something random into the data folder to make this work
-    alphabet = new Movie(app, "alphabet.mp4");
-    dark1 = new Movie(app, "dark1.mov");
-    dark2 = new Movie(app, "dark2.mov");
-    dark3 = new Movie(app, "dark3.mov");
-    dark4 = new Movie(app, "dark4.mov");
-    //goodOnes.add(dark1);
+    goodOnes.add(new Movie(app, "rabbit.mp4")); //Upload something random into the data folder to make this work
+    goodOnes.add(new Movie(app, "alphabet.mp4"));
+    badOnes.add(new Movie(app, "dark1.mov"));
+    badOnes.add(new Movie(app, "dark2.mov"));
+    badOnes.add(new Movie(app, "dark3.mov"));
+    badOnes.add(new Movie(app, "dark4.mov"));
     //rabbit.play(); //Play it once please although might want to loop this incase the scene isn't swiched automatically TODO
   }
   void init() {    
