@@ -19,22 +19,25 @@ boolean pressed;
 
 
 void setup(){
-  fullScreen(2);  //For production
-  //size(1280, 720); //For development
+  //fullScreen(2);  //For production
+  size(1280, 720); //For development
   frameRate(30); //Video's won't be higher anyway
   content = new Content(this); //Pass the PApplet of the sketch to use libary in class.
   connect = new Connect(this);
   connect.begin();
   control = new Control(this);
+  content.init();
 }
 
 void draw(){
+  
   background(0); //Black background as default backdrop
-  content.display(scene); //Display the correct content according to scene number
+ // content.display(scene); //Display the correct content according to scene number
+  content.showMovie();
   //content.update(control.scene);
-  control.experience(); //Control the experience based on the scene
-  control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
-  connect.read();
+  //control.experience(); //Control the experience based on the scene
+  //control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
+  //connect.read();
  // println("ARDUINO READ: " + pressed);
  // println(control.scene);
 }
@@ -42,12 +45,14 @@ void draw(){
 //Run the videos
 void movieEvent(Movie m){
     m.read();
-  }
+   }
  
-//void keyPressed(){
-//  control.scene();
-//  content.reset();
-//}
+void keyPressed(){
+ // control.scene();
+ // content.content();
+}
+void mousePressed(){
+}
 
 /***
 

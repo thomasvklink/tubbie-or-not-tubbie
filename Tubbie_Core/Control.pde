@@ -1,4 +1,7 @@
 //Class for control of the experience (selects scenes and changes content, lights and sounds accordingly. Also keeps track of time).
+//Written by the amazing and overall good guy who we owe eternal credits and beers to: Ysbrand Burgstede
+//Hereby we also accept that ex-via is the better do group and we all secretly envy to be one of them
+//if any of the above lines are removed ysbrand immediately retracts the rights to use his code
 
 class Control {
 
@@ -31,7 +34,7 @@ class Control {
     println(block);
     if (pressed && !block) {
       isPressed = true;
-      content.reset();
+      //content.reset();
         if(!sceneSwitch){
           scene(4,7);
           sceneSwitch = true;

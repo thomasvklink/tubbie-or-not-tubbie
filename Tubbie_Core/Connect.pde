@@ -24,7 +24,11 @@ class Connect {
       print("[" + i + "] ");
       println(Serial.list()[i]);
     }
+    try{
     port = new Serial(app, Serial.list()[0], 9600);
+    }catch(Exception e){
+    println("Servo not connected, starting without!");
+  }
   }
 
   void read() {
