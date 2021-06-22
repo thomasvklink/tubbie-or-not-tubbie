@@ -21,7 +21,8 @@ class Content {
   Movie dark3;
   Movie dark4;
 
-  ArrayList <Movie> moviesToPlay;
+  ArrayList <Movie> goodMoviesToPlay;
+  ArrayList <Movie> badMoviesToPlay;
   Movie nowPlaying;
   int currentIndex=0;
   float pauseTimer;
@@ -29,7 +30,7 @@ class Content {
   ArrayList<Movie> badOnes;
   
   Content(PApplet app) {
-    moviesToPlay=new ArrayList<Movie>();
+    goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
     
@@ -43,25 +44,28 @@ class Content {
   }
   
   void init() {    
-    moviesToPlay=new ArrayList<Movie>();
+    goodMoviesToPlay=new ArrayList<Movie>();
+    badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
     moviesToPlay.add(intro);
     moviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
+    goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
+    badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
   
   void showMovie() {
+    //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<moviesToPlay.size()) {      
       if (nowPlaying==null) {
-        nowPlaying=moviesToPlay.get(0);
+        nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
-        nowPlaying=moviesToPlay.remove(0);
+        nowPlaying=goodMoviesToPlay.remove(0);
       }
-
       if (nowPlaying.duration()==nowPlaying.time()) {
-        nowPlaying=moviesToPlay.get(0);
+        nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
-        nowPlaying=moviesToPlay.remove(0);
+        nowPlaying=goodMoviesToPlay.remove(0);
       }
     }
     if (nowPlaying.available()) {
@@ -74,7 +78,7 @@ class Content {
   }
 
   void addMovie(Movie newMovie) {
-    moviesToPlay.add(newMovie);
+    goodMoviesToPlay.add(newMovie);
   }
   
   void removeMovie(int index){
