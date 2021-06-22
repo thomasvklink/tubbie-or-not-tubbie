@@ -51,11 +51,6 @@ class Control {
       scene(2, 3);
       timer = 0;
     }
-    
-    //if (scene == 4 || scene == 5 || scene == 6 || scene == 7  && timer > 90) {
-    //  isPressed = false;
-    //  scene(2, 3);
-    //}
   }
 
   void scene(int start, int stop) {
