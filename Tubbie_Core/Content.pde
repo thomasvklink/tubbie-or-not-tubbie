@@ -21,6 +21,7 @@ class Content {
   Movie dark3;
   Movie dark4;
 
+  
   ArrayList <Movie> goodMoviesToPlay;
   ArrayList <Movie> badMoviesToPlay;
   Movie nowPlaying;
@@ -48,15 +49,14 @@ class Content {
     badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    moviesToPlay.add(intro);
-    moviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
+    //goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
   
   void showMovie() {
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
-    if (currentIndex<moviesToPlay.size()) {      
+    if (currentIndex<goodMoviesToPlay.size()) {      
       if (nowPlaying==null) {
         nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
@@ -81,7 +81,11 @@ class Content {
     goodMoviesToPlay.add(newMovie);
   }
   
+  void test(){
+    println("THIS WORKS");
+  }
+  
   void removeMovie(int index){
-    moviesToPlay.remove(index);
+    goodMoviesToPlay.remove(index);
   }
 }

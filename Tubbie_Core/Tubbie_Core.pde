@@ -13,7 +13,7 @@ Content content;
 Control control;
 Connect connect;
 
-int scene = 2;
+int scene = 1;
 boolean block;
 boolean pressed;
 
