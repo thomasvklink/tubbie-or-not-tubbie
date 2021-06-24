@@ -9,7 +9,7 @@ class Content {
   int timer;
   //Sounds
   SoundFile dark;
- 
+
   //Videos
   Movie intro;
   //Good content
@@ -25,7 +25,14 @@ class Content {
   Movie dark2;
   Movie dark3;
   Movie dark4;
-  
+  Movie dark5;
+  Movie dark6;
+  Movie dark7;
+  Movie dark8;
+  Movie dark9;
+  Movie dark10;
+  Movie dark11;
+
   int press;
   boolean hasPressed;
 
@@ -38,7 +45,7 @@ class Content {
   ArrayList<Movie> badOnes;
 
   Content(PApplet app) {
-    
+
     dark = new SoundFile(app, "dark.wav");
     goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
@@ -56,6 +63,14 @@ class Content {
     badOnes.add(new Movie(app, "dark2.mov"));
     badOnes.add(new Movie(app, "dark3.mov"));
     badOnes.add(new Movie(app, "dark4.mov"));
+    badOnes.add(new Movie(app, "dark5.mov"));
+    badOnes.add(new Movie(app, "dark6.mov"));
+    badOnes.add(new Movie(app, "dark7.mov"));
+    badOnes.add(new Movie(app, "dark8.mov"));
+    badOnes.add(new Movie(app, "dark9.mov"));
+    badOnes.add(new Movie(app, "dark10.mov"));
+    badOnes.add(new Movie(app, "dark11.mov"));
+    badOnes.add(new Movie(app, "dark12.mov"));
   }
 
   void init() {    
@@ -82,7 +97,7 @@ class Content {
           nowPlaying.play();
           nowPlaying=goodMoviesToPlay.remove(0);
         }
-      }else{
+      } else {
         if (nowPlaying==null) {
           nowPlaying=badMoviesToPlay.get(0);
           nowPlaying.play();
@@ -98,27 +113,27 @@ class Content {
     if (nowPlaying.available()) {
       nowPlaying.read();
     }
-    
-    if(pressed && !hasPressed && nowPlaying != intro){
+
+    if (pressed && !hasPressed && nowPlaying != intro) {
       hasPressed = true;
-      if(!dark.isPlaying()){
-         dark.play();
+      if (!dark.isPlaying()) {
+        dark.play();
       }
       nowPlaying.jump(nowPlaying.duration());
       nowPlaying.stop();
       goodMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
     }
-    
-    if (hasPressed){
+
+    if (hasPressed) {
       timer++;
     } 
-    if (timer > 60){
+    if (timer > 60) {
       hasPressed = false;
       timer = 0;
       nowPlaying.stop();
       goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     }
-    
+
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);
     }
