@@ -55,6 +55,21 @@ void loop() {
     defaultLighting();
     sendDMX(r, g, b, 0);
   }
+
+  //Serial communication from Processing
+  if (Serial.available() > 0) {
+    incomingByte = Serial.read();                        // read the oldest byte in the serial buffer
+    if (incomingByte == 'I') {                           // Intro is playing, cue specific scene
+      //Intro lighting scene
+    }                                  
+    if (incomingByte == 'C') {                           // Climax is playing, cue specific scene
+      //Climax lighting scene
+    }
+    if (incomingByte == 'E') {                           // End of experience, dim lighting
+      //End lighting scene
+    }
+  }
+  
 }
 
 byte isButtonPressed() {
