@@ -12,6 +12,7 @@ class Control {
   boolean hasPressed;
   boolean sceneSwitch;
   Connect connect;
+  int interactions = 0;
 
   Control(PApplet app) {
     content = new Content(app);
@@ -25,18 +26,22 @@ class Control {
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
-    if (scene == 1){
-      block = true;
-    } else {
-      block = false;
+    if (interactions == 0 && pressed) {
+      content.nowPlaying = content.intro;
+      content.nowPlaying.play();
+    }
+    if(pressed){
+      interactions++;
+    }
+    if(interactions == 5){
+      content.nowPlaying = content.climax;
+      content.nowPlaying.play();
     }
   }
-
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
   }
 
   void sound() { //It's best to include sound in the video but if we want to add some via Processing we can do it here.
-    
   }
 
   void clock(int max) { //Method to time the experience and take action accordingly

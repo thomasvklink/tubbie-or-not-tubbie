@@ -12,6 +12,7 @@ class Content {
 
   //Videos
   Movie intro;
+  Movie climax;
   //Good content
   Movie rabbit; 
   Movie alphabet;
@@ -70,7 +71,7 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
-    //badOnes.add(new Movie(app, "dark12.mov"));
+    climax = new Movie(app, "climax.mp4");
   }
 
   void init() {    
@@ -102,7 +103,7 @@ class Content {
       nowPlaying.read();
     }
 
-    if (pressed && !hasPressed && nowPlaying != intro) {
+    if (pressed && !hasPressed && nowPlaying != intro && nowPlaying != climax) {
       hasPressed = true;
       if (!dark.isPlaying()) {
         dark.play();
