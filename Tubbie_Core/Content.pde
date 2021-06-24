@@ -8,13 +8,19 @@ class Content {
   //int scene;
   int timer;
   //Sounds
-  Movie intro;
+  SoundFile dark;
+ 
   //Videos
-  //nice happy videos
-  Movie startscene;
+  Movie intro;
+  //Good content
   Movie rabbit; 
   Movie alphabet;
-  //'dark' videos
+  Movie cats;
+  Movie chicks;
+  Movie ducks;
+  Movie horses;
+  Movie puppies;
+  //Dark content
   Movie dark1;
   Movie dark2;
   Movie dark3;
@@ -32,6 +38,8 @@ class Content {
   ArrayList<Movie> badOnes;
 
   Content(PApplet app) {
+    
+    dark = new SoundFile(app, "dark.wav");
     goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
@@ -39,6 +47,11 @@ class Content {
     intro = new Movie(app, "intro.mp4");
     goodOnes.add(new Movie(app, "rabbit.mp4"));
     goodOnes.add(new Movie(app, "alphabet.mp4"));
+    goodOnes.add(new Movie(app, "cats.mp4"));
+    goodOnes.add(new Movie(app, "chicks.mp4"));
+    goodOnes.add(new Movie(app, "ducks.mp4"));
+    goodOnes.add(new Movie(app, "horses.mp4"));
+    goodOnes.add(new Movie(app, "puppies.mp4"));
     badOnes.add(new Movie(app, "dark1.mov"));
     badOnes.add(new Movie(app, "dark2.mov"));
     badOnes.add(new Movie(app, "dark3.mov"));
@@ -50,7 +63,7 @@ class Content {
     badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    goodMoviesToPlay.add(intro);
+    //goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
@@ -75,6 +88,9 @@ class Content {
     
     if(pressed && !hasPressed && nowPlaying != intro){
       hasPressed = true;
+      if(!dark.isPlaying()){
+         dark.play();
+      }
       nowPlaying.jump(nowPlaying.duration());
       nowPlaying.stop();
       goodMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
@@ -94,12 +110,4 @@ class Content {
       image(nowPlaying, 0, 0, width, height);
     }
   }
-
-  //void addMovie(Movie newMovie) {
-  //  goodMoviesToPlay.add(newMovie);
-  //}
-
-  //void removeMovie(int index) {
-  //  goodMoviesToPlay.remove(index);
-  //}
 }
