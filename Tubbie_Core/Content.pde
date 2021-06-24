@@ -70,7 +70,7 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
-    badOnes.add(new Movie(app, "dark12.mov"));
+    //badOnes.add(new Movie(app, "dark12.mov"));
   }
 
   void init() {    
@@ -97,19 +97,7 @@ class Content {
           nowPlaying.play();
           nowPlaying=goodMoviesToPlay.remove(0);
         }
-      } else {
-        if (nowPlaying==null) {
-          nowPlaying=badMoviesToPlay.get(0);
-          nowPlaying.play();
-          nowPlaying=badMoviesToPlay.remove(0);
-        }
-        if (nowPlaying.duration()==nowPlaying.time()) {
-          nowPlaying=badMoviesToPlay.get(0);
-          nowPlaying.play();
-          nowPlaying=badMoviesToPlay.remove(0);
-        }
-      }
-    }
+    }}
     if (nowPlaying.available()) {
       nowPlaying.read();
     }
