@@ -13,7 +13,6 @@ Content content;
 Control control;
 Connect connect;
 
-int scene;
 boolean block;
 boolean pressed;
 
