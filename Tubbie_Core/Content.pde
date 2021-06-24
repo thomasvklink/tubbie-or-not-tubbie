@@ -71,15 +71,28 @@ class Content {
   void showMovie() {
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<goodMoviesToPlay.size()) {      
-      if (nowPlaying==null) {
-        nowPlaying=goodMoviesToPlay.get(0);
-        nowPlaying.play();
-        nowPlaying=goodMoviesToPlay.remove(0);
-      }
-      if (nowPlaying.duration()==nowPlaying.time()) {
-        nowPlaying=goodMoviesToPlay.get(0);
-        nowPlaying.play();
-        nowPlaying=goodMoviesToPlay.remove(0);
+      if (pressed == false) {
+        if (nowPlaying==null) {
+          nowPlaying=goodMoviesToPlay.get(0);
+          nowPlaying.play();
+          nowPlaying=goodMoviesToPlay.remove(0);
+        }
+        if (nowPlaying.duration()==nowPlaying.time()) {
+          nowPlaying=goodMoviesToPlay.get(0);
+          nowPlaying.play();
+          nowPlaying=goodMoviesToPlay.remove(0);
+        }
+      }else{
+        if (nowPlaying==null) {
+          nowPlaying=badMoviesToPlay.get(0);
+          nowPlaying.play();
+          nowPlaying=badMoviesToPlay.remove(0);
+        }
+        if (nowPlaying.duration()==nowPlaying.time()) {
+          nowPlaying=badMoviesToPlay.get(0);
+          nowPlaying.play();
+          nowPlaying=badMoviesToPlay.remove(0);
+        }
       }
     }
     if (nowPlaying.available()) {
