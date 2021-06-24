@@ -71,7 +71,7 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
-    climax = new Movie(app, "climax.mp4");
+    climax = new Movie(app, "climax.mkv");
   }
 
   void init() {    
@@ -79,7 +79,7 @@ class Content {
     badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    //goodMoviesToPlay.add(intro);
+    goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
@@ -125,6 +125,20 @@ class Content {
 
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);
+    }
+  }
+  
+  void check(){
+    if (nowPlaying == intro){
+      introActive = true;
+    } else {
+      introActive = false;
+    }
+    
+    if (nowPlaying == climax){
+      climaxActive = true;
+    } else {
+      climaxActive = false;
     }
   }
 }

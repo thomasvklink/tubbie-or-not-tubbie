@@ -6,12 +6,12 @@
 class Control {
 
   Content content;
+  Connect connect;
   float time;
   int timer = 0;
   int press;
   boolean hasPressed;
   boolean sceneSwitch;
-  Connect connect;
   int interactions = 0;
 
   Control(PApplet app) {
@@ -30,15 +30,18 @@ class Control {
       content.nowPlaying = content.intro;
       content.nowPlaying.play();
     }
-    if(pressed){
+    if (pressed) {
       interactions++;
     }
-    if(interactions == 5){
+    if (interactions == 5) {
       content.nowPlaying = content.climax;
       content.nowPlaying.play();
     }
   }
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
+    if (introActive) {
+      println("Joe");
+    }
   }
 
   void sound() { //It's best to include sound in the video but if we want to add some via Processing we can do it here.
