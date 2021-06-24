@@ -9,7 +9,8 @@ class Control {
   //int scene = 2;
   float time;
   int timer = 0;
-  boolean isPressed;
+  int press;
+  boolean hasPressed;
   boolean sceneSwitch;
   Connect connect;
 
@@ -25,39 +26,11 @@ class Control {
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
-  println(isPressed);
     if (scene == 1){
       block = true;
     } else {
       block = false;
     }
-    
-    if (pressed){
-      content.test();
-      content.goodMoviesToPlay.add(content.badOnes.get((int)random(content.badOnes.size())));
-      content.goodMoviesToPlay.remove(0);
-    }
-    
-    //println(block);
-    //if (pressed && !block) {
-    //  isPressed = true;
-    //  //content.reset();
-    //    if(!sceneSwitch){
-    //      scene(4,7);
-    //      sceneSwitch = true;
-    //    }
-    //}
-    //if (isPressed) {
-    //  timer++;
-    //} else {
-    //  timer = 0;
-    //}
-    //if ((scene == 4 || scene == 5 || scene == 6 || scene == 7 ) && timer > 90) {
-    //  isPressed = false;
-    //  sceneSwitch = false;
-    //  scene(2, 3);
-    //  timer = 0;
-    //}
   }
 
   void scene(int start, int stop) {

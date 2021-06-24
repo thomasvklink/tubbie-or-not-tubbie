@@ -7,7 +7,6 @@ class Content {
 
   //int scene;
   int timer;
-  int timer2;
   //Sounds
   Movie intro;
   //Videos
@@ -20,8 +19,10 @@ class Content {
   Movie dark2;
   Movie dark3;
   Movie dark4;
-
   
+  int press;
+  boolean hasPressed;
+
   ArrayList <Movie> goodMoviesToPlay;
   ArrayList <Movie> badMoviesToPlay;
   Movie nowPlaying;
@@ -29,12 +30,12 @@ class Content {
   float pauseTimer;
   ArrayList<Movie> goodOnes;
   ArrayList<Movie> badOnes;
-  
+
   Content(PApplet app) {
     goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
-    
+
     intro = new Movie(app, "intro.mp4");
     goodOnes.add(new Movie(app, "rabbit.mp4"));
     goodOnes.add(new Movie(app, "alphabet.mp4"));
@@ -43,17 +44,17 @@ class Content {
     badOnes.add(new Movie(app, "dark3.mov"));
     badOnes.add(new Movie(app, "dark4.mov"));
   }
-  
+
   void init() {    
     goodMoviesToPlay=new ArrayList<Movie>();
     badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    //goodMoviesToPlay.add(intro);
+    goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
-  
+
   void showMovie() {
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<goodMoviesToPlay.size()) {      
@@ -71,21 +72,34 @@ class Content {
     if (nowPlaying.available()) {
       nowPlaying.read();
     }
-    println(nowPlaying.time());
+    
+    if(pressed && !hasPressed && nowPlaying != intro){
+      hasPressed = true;
+      nowPlaying.jump(nowPlaying.duration());
+      nowPlaying.stop();
+      goodMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
+    }
+    
+    if (hasPressed){
+      timer++;
+    } 
+    if (timer > 60){
+      hasPressed = false;
+      timer = 0;
+      nowPlaying.stop();
+      goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
+    }
+    
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);
     }
   }
 
-  void addMovie(Movie newMovie) {
-    goodMoviesToPlay.add(newMovie);
-  }
-  
-  void test(){
-    println("THIS WORKS");
-  }
-  
-  void removeMovie(int index){
-    goodMoviesToPlay.remove(index);
-  }
+  //void addMovie(Movie newMovie) {
+  //  goodMoviesToPlay.add(newMovie);
+  //}
+
+  //void removeMovie(int index) {
+  //  goodMoviesToPlay.remove(index);
+  //}
 }
