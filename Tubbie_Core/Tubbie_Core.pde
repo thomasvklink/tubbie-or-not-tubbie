@@ -1,9 +1,9 @@
 /***
-Tubbie or not Tubbie
-Group 15 - Ex-Pers
-Creative Technology M4 @ University of Twente  
-for GOGBOT Festival 2021
-***/
+ Tubbie or not Tubbie
+ Group 15 - Ex-Pers
+ Creative Technology M4 @ University of Twente  
+ for GOGBOT Festival 2021
+ ***/
 
 import processing.video.*; //Don't forget to install the libary locally in the IDE
 import processing.sound.*;
@@ -17,8 +17,10 @@ boolean block;
 boolean pressed;
 boolean introActive;
 boolean climaxActive;
+int interactions = 0;
+  boolean hasPressed;
 
-void setup(){
+void setup() {
   //fullScreen(2);  //For production
   size(1280, 720); //For development
   frameRate(30); //Video's won't be higher anyway
@@ -29,19 +31,19 @@ void setup(){
   control = new Control(this);
 }
 
-void draw(){
-  println(frameRate);
+void draw() {
+  //println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
   content.check();
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
-  //connect.read();
+  connect.read();
   println("ARDUINO READ: " + pressed);
   //pressed = false;
 }
 
 //Run the videos
-void movieEvent(Movie m){
-    m.read();
-   }
+void movieEvent(Movie m) {
+  m.read();
+}

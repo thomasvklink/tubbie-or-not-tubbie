@@ -10,9 +10,7 @@ class Control {
   float time;
   int timer = 0;
   int press;
-  boolean hasPressed;
   boolean sceneSwitch;
-  int interactions = 0;
 
   Control(PApplet app) {
     content = new Content(app);
@@ -27,15 +25,20 @@ class Control {
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
     if (interactions == 0 && pressed) {
-      content.nowPlaying = content.intro;
+      content.goodMoviesToPlay.add(content.intro);
+      content.nowPlaying=content.goodMoviesToPlay.get(0);
       content.nowPlaying.play();
+      hasPressed = true;
+      println(interactions);
     }
-    if (pressed) {
+    if (hasPressed) {
       interactions++;
+      hasPressed = false;
     }
     if (interactions == 5) {
       content.nowPlaying = content.climax;
       content.nowPlaying.play();
+      interactions = 0;
     }
   }
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there

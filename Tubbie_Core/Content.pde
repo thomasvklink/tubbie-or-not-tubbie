@@ -35,8 +35,6 @@ class Content {
   Movie dark11;
 
   int press;
-  boolean hasPressed;
-
   ArrayList <Movie> goodMoviesToPlay;
   ArrayList <Movie> badMoviesToPlay;
   Movie nowPlaying;
@@ -51,6 +49,7 @@ class Content {
     goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
+    
 
     intro = new Movie(app, "intro.mp4");
     goodOnes.add(new Movie(app, "rabbit.mp4"));
@@ -71,6 +70,8 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
+    
+    nowPlaying = goodOnes.get(0);
     climax = new Movie(app, "climax.mkv");
   }
 
@@ -79,7 +80,7 @@ class Content {
     badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    goodMoviesToPlay.add(intro);
+    //goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
@@ -87,7 +88,7 @@ class Content {
   void showMovie() {
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<goodMoviesToPlay.size()) {      
-      if (pressed == false) {
+      if (pressed == false && interactions != 0  && interactions !=5) {
         if (nowPlaying==null) {
           nowPlaying=goodMoviesToPlay.get(0);
           nowPlaying.play();
@@ -99,11 +100,11 @@ class Content {
           nowPlaying=goodMoviesToPlay.remove(0);
         }
     }}
-    if (nowPlaying.available()) {
+    if (interactions !=0) {
       nowPlaying.read();
     }
 
-    if (pressed && !hasPressed && nowPlaying != intro && nowPlaying != climax) {
+    if (pressed && !hasPressed && interactions != 0  && interactions !=5) {
       hasPressed = true;
       if (!dark.isPlaying()) {
         dark.play();
