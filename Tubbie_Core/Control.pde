@@ -6,10 +6,10 @@
 class Control {
 
   Content content;
+  Connect connect;
   float time;
   int timer = 0;
   int press;
-  boolean hasPressed;
   boolean sceneSwitch;
   Connect connect;
   boolean introActive;
@@ -24,7 +24,7 @@ int interactions = 0;
     content();
     light();
     sound();
-    //println(timer);
+    println(introActive);
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
@@ -45,12 +45,13 @@ int interactions = 0;
   //    interactions = 0;
   //  }
   }
-
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
+    if (introActive) {
+      println("Joe");
+    }
   }
 
   void sound() { //It's best to include sound in the video but if we want to add some via Processing we can do it here.
-    
   }
 
   void clock(int max) { //Method to time the experience and take action accordingly

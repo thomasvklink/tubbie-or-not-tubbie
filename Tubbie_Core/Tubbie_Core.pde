@@ -13,7 +13,6 @@ Content content;
 Control control;
 Connect connect;
 
-int scene;
 boolean block;
 boolean pressed;
 boolean introActive;
@@ -35,14 +34,18 @@ void draw() {
   println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
+  content.check();
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
-  connect.read();
+  //connect.read();
   println("ARDUINO READ: " + pressed);
-  //pressed = false;
 }
 
 //Run the videos
 void movieEvent(Movie m) {
   m.read();
+}
+
+void keyPressed(){
+ pressed = true; 
 }
