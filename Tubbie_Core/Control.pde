@@ -20,7 +20,7 @@ class Control {
     content();
     light();
     sound();
-    //println(timer);
+    println(introActive);
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button

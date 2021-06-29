@@ -13,6 +13,7 @@ class Content {
   //Videos
   Movie intro;
   Movie climax;
+
   //Good content
   Movie rabbit; 
   Movie alphabet;
@@ -21,6 +22,7 @@ class Content {
   Movie ducks;
   Movie horses;
   Movie puppies;
+
   //Dark content
   Movie dark1;
   Movie dark2;
@@ -49,7 +51,7 @@ class Content {
     goodMoviesToPlay=new ArrayList<Movie>();
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
-    
+
 
     intro = new Movie(app, "intro.mp4");
     goodOnes.add(new Movie(app, "rabbit.mp4"));
@@ -70,7 +72,7 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
-    
+
     nowPlaying = goodOnes.get(0);
     climax = new Movie(app, "climax.mkv");
   }
@@ -99,14 +101,16 @@ class Content {
           nowPlaying.play();
           nowPlaying=goodMoviesToPlay.remove(0);
         }
-    }}
+      }
+    }
     if (interactions !=0) {
       nowPlaying.read();
+      //println("reading?");
     }
 
     if (pressed && !hasPressed && interactions != 0  && interactions !=5) {
       hasPressed = true;
-      if (!dark.isPlaying()) {
+      if (!dark.isPlaying() && introActive) {
         dark.play();
       }
       nowPlaying.jump(nowPlaying.duration());
@@ -126,17 +130,19 @@ class Content {
 
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);
+      //println("video?");
     }
   }
-  
-  void check(){
-    if (nowPlaying == intro){
+
+  void check() {
+    //println("checking?");
+    if (nowPlaying == intro) {
       introActive = true;
     } else {
       introActive = false;
     }
-    
-    if (nowPlaying == climax){
+
+    if (nowPlaying == climax) {
       climaxActive = true;
     } else {
       climaxActive = false;
