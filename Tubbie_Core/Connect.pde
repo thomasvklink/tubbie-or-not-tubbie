@@ -13,6 +13,7 @@ class Connect {
   int NEWLINE = 10;
   int n;
   int b;
+  int pressCounter;
   
   Connect(PApplet app) {
     this.app = app;
@@ -36,6 +37,13 @@ class Connect {
     while (port.available() > 0) {
       serialEvent(port.read()); // read data
     }
+    if (boolean(value[0])){
+     pressCounter++;
+    }
+    if(pressCounter>=5){
+      pressed = true;
+      pressCounter = 0;
+    } else pressed = false;
     pressed = boolean(value[0]); //level value
   }
 

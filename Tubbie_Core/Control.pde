@@ -11,10 +11,8 @@ class Control {
   int timer = 0;
   int press;
   boolean sceneSwitch;
-  Connect connect;
   boolean introActive;
-boolean climaxActive;
-int interactions = 0;
+  boolean climaxActive;
 
   Control(PApplet app) {
     content = new Content(app);
@@ -24,26 +22,26 @@ int interactions = 0;
     content();
     light();
     sound();
-    println(introActive);
+    //println(introActive);
   }
 
   void content() { //Code to change scene variable, we probably want to randomise the scene number once this method is activated by the arduino button
-  // if (interactions == 0 && pressed) {
-  //    content.goodMoviesToPlay.add(content.intro);
-  //    content.nowPlaying=content.goodMoviesToPlay.get(0);
-  //    content.nowPlaying.play();
-  //    hasPressed = true;
-  //    println(interactions);
-  //  }
-  //  if (hasPressed) {
-  //    interactions++;
-  //    hasPressed = false;
-  //  }
-  //  if (interactions == 5) {
-  //    content.nowPlaying = content.climax;
-  //    content.nowPlaying.play();
-  //    interactions = 0;
-  //  }
+    // if (interactions == 0 && pressed) {
+    //    content.goodMoviesToPlay.add(content.intro);
+    //    content.nowPlaying=content.goodMoviesToPlay.get(0);
+    //    content.nowPlaying.play();
+    //    hasPressed = true;
+    //    println(interactions);
+    //  }
+    //  if (hasPressed) {
+    //    interactions++;
+    //    hasPressed = false;
+    //  }
+    //  if (interactions == 5) {
+    //    content.nowPlaying = content.climax;
+    //    content.nowPlaying.play();
+    //    interactions = 0;
+    //  }
   }
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
     if (introActive) {

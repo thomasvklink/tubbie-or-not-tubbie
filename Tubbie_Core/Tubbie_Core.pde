@@ -31,7 +31,7 @@ void setup() {
 }
 
 void draw() {
-  println(frameRate);
+  //println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
   content.check();
@@ -44,8 +44,4 @@ void draw() {
 //Run the videos
 void movieEvent(Movie m) {
   m.read();
-}
-
-void keyPressed(){
- pressed = true; 
 }

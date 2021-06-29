@@ -43,6 +43,7 @@ class Content {
   float pauseTimer;
   ArrayList<Movie> goodOnes;
   ArrayList<Movie> badOnes;
+  boolean hasPressed;
 
   Content(PApplet app) {
 
@@ -71,7 +72,6 @@ class Content {
     badOnes.add(new Movie(app, "dark9.mov"));
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
-    //badOnes.add(new Movie(app, "dark12.mov"));
 
     climax = new Movie(app, "climax.mp4");
   }
@@ -80,35 +80,48 @@ class Content {
     goodMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    goodMoviesToPlay.add(intro);
+    //goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
   }
 
   void showMovie() {
+    println(nowPlaying);
+    if (keyPressed) {
+      pressed = true; 
+      interactions++;
+    } else {
+      pressed = false;
+    }
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<goodMoviesToPlay.size()) {      
-      
-        if (nowPlaying==null) {
-          nowPlaying=goodMoviesToPlay.get(0);
-          nowPlaying.play();
-          goodMoviesToPlay.remove(0);
-        }
-        if (nowPlaying.duration()==nowPlaying.time()) {
-          nowPlaying.stop();
-          nowPlaying=goodMoviesToPlay.get(0);
-          nowPlaying.play();
-          goodMoviesToPlay.remove(0);
-          hasPressed = false;
-        }
+      if (interactions == 0) {
+        goodMoviesToPlay.remove(0);
+        goodMoviesToPlay.add(intro);
+        nowPlaying=goodMoviesToPlay.get(0);
+        nowPlaying.play();
+        goodMoviesToPlay.remove(0);
       }
-    
-    
+      if (nowPlaying==null) {
+        nowPlaying=goodMoviesToPlay.get(0);
+        nowPlaying.play();
+        goodMoviesToPlay.remove(0);
+      }
+      if (nowPlaying.duration()==nowPlaying.time()) {
+        nowPlaying.stop();
+        nowPlaying=goodMoviesToPlay.get(0);
+        nowPlaying.play();
+        goodMoviesToPlay.remove(0);
+        hasPressed = false;
+      }
+    }
+
+
     if (nowPlaying.available()) {
       nowPlaying.read();
       //println("reading?");
     }
 
-    if (pressed && !hasPressed && interactions != 0  && interactions !=5) {
+    if (pressed && !hasPressed && interactions != 0 && interactions != 5) {
       hasPressed = true;
       if (!dark.isPlaying() && introActive) {
         dark.play();
