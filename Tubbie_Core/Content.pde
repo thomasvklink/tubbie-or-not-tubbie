@@ -12,6 +12,7 @@ class Content {
 
   //Videos
   Movie intro;
+  Movie climax;
   //Good content
   Movie rabbit; 
   Movie alphabet;
@@ -71,33 +72,37 @@ class Content {
     badOnes.add(new Movie(app, "dark10.mov"));
     badOnes.add(new Movie(app, "dark11.mov"));
     //badOnes.add(new Movie(app, "dark12.mov"));
+
+    climax = new Movie(app, "climax.mp4");
   }
 
   void init() {    
     goodMoviesToPlay=new ArrayList<Movie>();
-    badMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    //goodMoviesToPlay.add(intro);
+    goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
-    badMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
   }
 
   void showMovie() {
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
     if (currentIndex<goodMoviesToPlay.size()) {      
-      if (pressed == false) {
+      
         if (nowPlaying==null) {
           nowPlaying=goodMoviesToPlay.get(0);
           nowPlaying.play();
-          nowPlaying=goodMoviesToPlay.remove(0);
+          goodMoviesToPlay.remove(0);
         }
         if (nowPlaying.duration()==nowPlaying.time()) {
+          nowPlaying.stop();
           nowPlaying=goodMoviesToPlay.get(0);
           nowPlaying.play();
-          nowPlaying=goodMoviesToPlay.remove(0);
+          goodMoviesToPlay.remove(0);
+          hasPressed = false;
         }
-    }}
+      }
+    
+    
     if (nowPlaying.available()) {
       nowPlaying.read();
     }
@@ -107,20 +112,12 @@ class Content {
       if (!dark.isPlaying()) {
         dark.play();
       }
-      nowPlaying.jump(nowPlaying.duration());
       nowPlaying.stop();
-      goodMoviesToPlay.add(badOnes.get((int)random(badOnes.size())));
-    }
-
-    if (hasPressed) {
-      timer++;
-    } 
-    if (timer > 60) {
-      hasPressed = false;
-      timer = 0;
-      nowPlaying.stop();
+      nowPlaying=badOnes.get((int)random(badOnes.size()));
+      nowPlaying.play();
       goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     }
+
 
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);

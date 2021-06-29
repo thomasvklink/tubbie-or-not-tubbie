@@ -1,9 +1,9 @@
 /***
-Tubbie or not Tubbie
-Group 15 - Ex-Pers
-Creative Technology M4 @ University of Twente  
-for GOGBOT Festival 2021
-***/
+ Tubbie or not Tubbie
+ Group 15 - Ex-Pers
+ Creative Technology M4 @ University of Twente  
+ for GOGBOT Festival 2021
+ ***/
 
 import processing.video.*; //Don't forget to install the libary locally in the IDE
 import processing.sound.*;
@@ -16,8 +16,11 @@ Connect connect;
 int scene;
 boolean block;
 boolean pressed;
+boolean introActive;
+boolean climaxActive;
+int interactions = 0;
 
-void setup(){
+void setup() {
   //fullScreen(2);  //For production
   size(1280, 720); //For development
   frameRate(30); //Video's won't be higher anyway
@@ -28,7 +31,7 @@ void setup(){
   control = new Control(this);
 }
 
-void draw(){
+void draw() {
   println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
@@ -40,6 +43,6 @@ void draw(){
 }
 
 //Run the videos
-void movieEvent(Movie m){
-    m.read();
-   }
+void movieEvent(Movie m) {
+  m.read();
+}
