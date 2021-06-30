@@ -45,7 +45,11 @@ class Control {
   }
   void light() { //Code to send something back to the arduino to change the lighting sequence that is programmed there
     if (introActive) {
-      println("Joe");
+      connect.port.write("I"); //Send an specific character to the Arduin0
+    }
+    
+    if (climaxActive) {
+      connect.port.write("C"); //Send an specific character to the Arduin0
     }
   }
 
@@ -55,7 +59,7 @@ class Control {
   void clock(int max) { //Method to time the experience and take action accordingly
     //time = millis();
     time = time + 0.0333333333333333; //Convert framerate (30) to seconds
-    println(time); //Bit slow still TODO
+    //println(time); //Bit slow still TODO
     if (time > max) { //End experience after a desired amount of time (max)
       println("3 minutes after the start of experience, end it now! You need to MOVE");
       time = 0;

@@ -43,7 +43,7 @@ class Content {
   float pauseTimer;
   ArrayList<Movie> goodOnes;
   ArrayList<Movie> badOnes;
-  boolean hasPressed;
+
 
   Content(PApplet app) {
 
@@ -52,8 +52,8 @@ class Content {
     goodOnes=new ArrayList<Movie>();
     badOnes=new ArrayList<Movie>();
 
-
     intro = new Movie(app, "intro.mp4");
+
     goodOnes.add(new Movie(app, "rabbit.mp4"));
     goodOnes.add(new Movie(app, "alphabet.mp4"));
     goodOnes.add(new Movie(app, "cats.mp4"));
@@ -80,41 +80,59 @@ class Content {
     goodMoviesToPlay=new ArrayList<Movie>();
     currentIndex=0;
     pauseTimer=0;
-    //goodMoviesToPlay.add(intro);
+    goodMoviesToPlay.add(intro);
     goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
   }
 
   void showMovie() {
-    println(nowPlaying);
-    if (keyPressed) {
-      pressed = true; 
+    println(interactions);
+    println(goodMoviesToPlay);
+    if (keyPressed && !hasPressed && !dark.isPlaying()) { 
+      pressed = true;  
       interactions++;
-    } else {
+    } else { 
       pressed = false;
-    }
+      hasPressed = false;
+    } 
+
     //Checkt elke keer of de huidige soundfile afgelopen is en de timer ook en speelt dan de track af
-    if (currentIndex<goodMoviesToPlay.size()) {      
-      if (interactions == 0) {
+    if (currentIndex<goodMoviesToPlay.size()) {  
+
+      if (interactions == 0 && pressed) {
         goodMoviesToPlay.remove(0);
         goodMoviesToPlay.add(intro);
         nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
         goodMoviesToPlay.remove(0);
       }
+
+      if (interactions == 5 && pressed) {
+        goodMoviesToPlay.remove(0);
+        nowPlaying.stop();
+        goodMoviesToPlay.add(climax);
+        nowPlaying=goodMoviesToPlay.get(0);
+        nowPlaying.play();
+        goodMoviesToPlay.remove(0);
+        goodMoviesToPlay.add(intro);
+        interactions = 0;
+      }
+
       if (nowPlaying==null) {
         nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
         goodMoviesToPlay.remove(0);
       }
-      if (nowPlaying.duration()==nowPlaying.time()) {
+
+      if  (nowPlaying.time() == nowPlaying.duration()) {
+        println("WERKT!");
+        hasPressed = false;
         nowPlaying.stop();
         nowPlaying=goodMoviesToPlay.get(0);
         nowPlaying.play();
         goodMoviesToPlay.remove(0);
-        hasPressed = false;
       }
+      
     }
-
 
     if (nowPlaying.available()) {
       nowPlaying.read();
@@ -123,7 +141,7 @@ class Content {
 
     if (pressed && !hasPressed && interactions != 0 && interactions != 5) {
       hasPressed = true;
-      if (!dark.isPlaying() && introActive) {
+      if (!dark.isPlaying() && !introActive) {
         dark.play();
       }
       nowPlaying.stop();
@@ -132,15 +150,12 @@ class Content {
       goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
     }
 
-
     if (nowPlaying!=null) {
       image(nowPlaying, 0, 0, width, height);
-      //println("video?");
     }
   }
 
   void check() {
-    //println("checking?");
     if (nowPlaying == intro) {
       introActive = true;
     } else {

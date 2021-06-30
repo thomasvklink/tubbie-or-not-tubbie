@@ -15,9 +15,9 @@ Connect connect;
 
 boolean block;
 boolean pressed;
-boolean introActive;
+boolean hasPressed;;boolean introActive;
 boolean climaxActive;
-int interactions = 0;
+float interactions = 0;
 
 void setup() {
   //fullScreen(2);  //For production

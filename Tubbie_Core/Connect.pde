@@ -15,6 +15,8 @@ class Connect {
   int b;
   int pressCounter;
   
+  boolean calculate;
+  
   Connect(PApplet app) {
     this.app = app;
   }
@@ -26,7 +28,7 @@ class Connect {
       println(Serial.list()[i]);
     }
     try{
-    port = new Serial(app, Serial.list()[2], 9600);
+    port = new Serial(app, Serial.list()[0], 9600);
     }catch(Exception e){
     println("Servo not connected, starting without!");
   }
@@ -37,15 +39,22 @@ class Connect {
     while (port.available() > 0) {
       serialEvent(port.read()); // read data
     }
-    if (boolean(value[0])){
-     pressCounter++;
+    //if (boolean(value[0])){
+    // pressCounter++;
+    //}
+    //if(pressCounter>=5){
+    //  pressed = true;
+    //  pressCounter = 0;
+    //} else pressed = false;
+    println("Interactions: " + interactions);
+    if (pressed && !hasPressed) {
+      pressed = true; 
+      interactions++;
+    } else {
+      pressed = false;
     }
-    if(pressCounter>=5){
-      pressed = true;
-      pressCounter = 0;
-    } else pressed = false;
     pressed = boolean(value[0]); //level value
-  }
+  } 
 
   //Catch and parse serial data from Arduino
   void serialEvent(int serial) 
