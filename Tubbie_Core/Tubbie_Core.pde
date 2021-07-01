@@ -13,8 +13,6 @@ import gifAnimation.*;
 Content content;
 Control control;
 Connect connect;
-PApplet app; 
-Gif bird;
 
 boolean block;
 boolean pressed;
@@ -35,7 +33,6 @@ void setup() {
 }
 
 void draw() {
-  //println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
   control.experience(); //Control the experience based on the scene

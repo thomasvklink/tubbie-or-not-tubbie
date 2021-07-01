@@ -1,4 +1,4 @@
-//TODO Coördinate with Ruben how we will handle the last part of the Arduino communication
+//TODO Coördinate with Ruben how we will handle the last part of the Arduino communication!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //Data writer Edwin 13 M2 flashbacks
 
 class Connect {

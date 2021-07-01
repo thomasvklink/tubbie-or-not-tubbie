@@ -14,27 +14,7 @@ class Content {
   Movie intro;
   Movie outro;
   Movie climax;
-  //Good content
-  Movie rabbit; 
-  Movie alphabet;
-  Movie cats;
-  Movie chicks;
-  Movie ducks;
-  Movie horses;
-  Movie puppies;
-
-  //Dark content
-  Movie dark1;
-  Movie dark2;
-  Movie dark3;
-  Movie dark4;
-  Movie dark5;
-  Movie dark6;
-  Movie dark7;
-  Movie dark8;
-  Movie dark9;
-  Movie dark10;
-  Movie dark11;
+  //Movie waitingScreen;
 
   int press;
   ArrayList <Movie> goodMoviesToPlay;
@@ -44,6 +24,7 @@ class Content {
   ArrayList<Movie> goodOnes;
   ArrayList<Movie> badOnes;
   boolean hasEnded;
+  boolean startScreenActive;
 
 
   Content(PApplet app) {
@@ -55,6 +36,7 @@ class Content {
 
     intro = new Movie(app, "intro.mp4");
     outro = new Movie(app, "outro.mp4");
+    //waitingScreen = new Movie(app, "waiting.mp4");
 
     goodOnes.add(new Movie(app, "rabbit.mp4"));
     goodOnes.add(new Movie(app, "alphabet.mp4"));
@@ -88,9 +70,8 @@ class Content {
 
   void showMovie() {
     println(interactions);
-    //println(goodMoviesToPlay);
-    //println(hasEnded);
-    if (keyPressed && !hasPressed && !dark.isPlaying()) { 
+    println(goodMoviesToPlay);
+    if (keyPressed && nowPlaying!= intro && !dark.isPlaying() && nowPlaying!=climax && nowPlaying!= outro) { 
       pressed = true;  
       interactions++;
     } else { 
@@ -99,6 +80,8 @@ class Content {
     } 
 
     if (interactions == 0 && pressed) {
+      nowPlaying.stop();
+      goodMoviesToPlay=new ArrayList<Movie>();
       goodMoviesToPlay.add(0, intro);
       nowPlaying=goodMoviesToPlay.get(0);
       nowPlaying.play();
@@ -122,11 +105,21 @@ class Content {
       nowPlaying.play();
       goodMoviesToPlay.remove(0);
     }
-    //if (nowPlaying==outro) {
-    //  hasEnded = true;
-    //}
+    if (abs(nowPlaying.time() - nowPlaying.duration()) < 0.1 && interactions == -1) {
+      println("werkt dit");
+      startScreenActive = true;
+    }
+    if (startScreenActive) {
+      println("is it working?");
+      nowPlaying.stop();
+      goodMoviesToPlay=new ArrayList<Movie>();
+      goodMoviesToPlay.add(0, outro);
+      nowPlaying=goodMoviesToPlay.get(0);
+      nowPlaying.play();
+      nowPlaying.loop();
+      startScreenActive = false;
+    }
     if  (abs(nowPlaying.time() - nowPlaying.duration()) < 0.05) {
-      //println("Next?");
       hasPressed = false;
       introActive = false;
       nowPlaying.stop();
@@ -135,15 +128,6 @@ class Content {
       if (nowPlaying!=climax||nowPlaying!=outro) {
         goodMoviesToPlay.add(goodOnes.get((int)random(goodOnes.size())));
       }
-      //if (hasEnded) {
-      //  println("Looping?");
-      //  nowPlaying.stop();
-      //  goodMoviesToPlay=new ArrayList<Movie>();
-      //  nowPlaying=dark1;
-      //  nowPlaying.play();
-      //  nowPlaying.loop();
-      //  hasEnded = false;
-      //}
       goodMoviesToPlay.remove(0);
     }
 
@@ -151,7 +135,7 @@ class Content {
       nowPlaying.read();
     }
 
-    if (pressed && !hasPressed && interactions != -1 && !introActive && interactions != 5) {
+    if (pressed && !hasPressed && interactions != -1 && interactions != 0 && interactions != 5) {
       hasPressed = true;
       if (!dark.isPlaying() && !introActive) {
         dark.play();
