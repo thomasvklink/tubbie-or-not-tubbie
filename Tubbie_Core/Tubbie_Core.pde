@@ -8,16 +8,20 @@
 import processing.video.*; //Don't forget to install the libary locally in the IDE
 import processing.sound.*;
 import processing.serial.*;
+import gifAnimation.*;
 
 Content content;
 Control control;
 Connect connect;
+PApplet app; 
+Gif bird;
 
 boolean block;
 boolean pressed;
-boolean hasPressed;;boolean introActive;
+boolean hasPressed;
+boolean introActive;
 boolean climaxActive;
-float interactions = 0;
+int interactions = 0;
 
 void setup() {
   //fullScreen(2);  //For production
@@ -34,7 +38,6 @@ void draw() {
   //println(frameRate);
   background(0); //Black background as default backdrop
   content.showMovie(); //Display content
-  content.check();
   control.experience(); //Control the experience based on the scene
   control.clock(180); //Set the control clock to let the experience last for 180 seconds max (not influnced by interaction)
   //connect.read();
