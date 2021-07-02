@@ -17,7 +17,7 @@ Connect connect;
 boolean block;
 boolean pressed;
 boolean hasPressed;
-boolean introActive;
+boolean introActive; 
 boolean climaxActive;
 int interactions = 0;
 
